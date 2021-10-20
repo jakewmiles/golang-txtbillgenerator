@@ -22,6 +22,15 @@ func createBill() bill {
 	return b
 }
 
+func (b *bill) save() {
+	data := []byte(b.format())
+	err := os.WriteFile("bills/"+b.name+".txt", data, 0644)
+	if err != nil {
+		panic(err)
+	}
+	fmt.Println("Bill was saved to file: bills/" + b.name + ".txt")
+}
+
 func promptOptions(b bill) {
 	reader := bufio.NewReader(os.Stdin)
 	opt, _ := getInput("Choose option (a - add item) (s - save bill) (t - add tip): ", reader)
@@ -50,7 +59,8 @@ func promptOptions(b bill) {
 		fmt.Println("Tip added - ", tip)
 		promptOptions(b)
 	case "s":
-		fmt.Println(b)
+		b.save()
+		fmt.Println("You saved the file: ", b.name)
 	default:
 		fmt.Printf("%v not an option \n", opt)
 		promptOptions(b)

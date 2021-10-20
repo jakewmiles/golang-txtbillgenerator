@@ -1,0 +1,6 @@
+Bill breakdown: 
+Water                     $1.99 
+Coffee                    $2.99 
+Cake                      $4.99 
+tip                       $2.00 
+total                     $11.97
