@@ -40,10 +40,17 @@ func promptOptions(b bill) {
 		promptOptions(b)
 	case "t":
 		tip, _ := getInput("Item name: ", reader)
-		fmt.Println(tip)
+		t, err := strconv.ParseFloat(tip, 64)
+		if err != nil {
+			fmt.Println("The tip must be an number!")
+			promptOptions(b)
+		} else {
+			b.updateTip(t)
+		}
+		fmt.Println("Tip added - ", tip)
 		promptOptions(b)
 	case "s":
-		fmt.Println("s selected")
+		fmt.Println(b)
 	default:
 		fmt.Printf("%v not an option \n", opt)
 		promptOptions(b)
